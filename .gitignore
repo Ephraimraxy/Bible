@@ -1,6 +1,32 @@
-node_modules
-dist
+node_modules/
+dist/
 .DS_Store
-server/public
+server/public/
 vite.config.ts.*
 *.tar.gz
+*.zip
+*.apk
+
+# Android/Gradle Build Tools
+jdk/
+android-sdk/
+cmdline-tools/
+gradle-8.7/
+.gradle/
+app/build/
+local.properties
+.idea/
+*.iml
+
+# Scripts/Temporary
+git-filter-repo
+*.pyc
+__pycache__/
+*.txt
+*.py
+!.gitignore
+!README.md
+!fetch_bible_db_resume.py
+!fetch_amharic.py
+!rename_versions.py
+!check_db_status.py
