@@ -5,95 +5,286 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?android:attr/colorBackground">
+    android:background="@color/reading_bg">
 
-    <!-- ========== TOP APP BAR ========== -->
+    <!-- ========== PREMIUM HEADER ========== -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:elevation="4dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp">
+            android:background="@color/royal_blue">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tvHeader"
-                    android:layout_width="0dp"
+                <!-- Logo: JK (Gold) Bible (White) -->
+                <LinearLayout
+                    android:id="@+id/layoutLogo"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Offline Bible"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/white"
-                    android:ellipsize="end"
-                    android:maxLines="1"/>
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="JK "
+                        android:textColor="@color/divine_gold"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bible"
+                        android:textColor="@color/pure_white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnMenu"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    android:tint="@color/pure_white"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
 
                 <ImageButton
                     android:id="@+id/btnNightMode"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_toStartOf="@id/btnSearchTop"
+                    android:layout_centerVertical="true"
                     android:src="@android:drawable/ic_menu_view"
+                    android:tint="@color/pure_white"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Toggle Night Mode"
                     android:layout_marginEnd="4dp"/>
 
                 <ImageButton
-                    android:id="@+id/btnSearch"
+                    android:id="@+id/btnSearchTop"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:src="@android:drawable/ic_menu_search"
+                    android:tint="@color/pure_white"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Search"/>
-            </LinearLayout>
+                    android:layout_marginEnd="8dp"/>
+            </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
+
+        <!-- Gold Divider Border -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divine_gold" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- ========== SELECTOR ROW ========== -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="?attr/colorPrimary">
+        android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/spinnerVersion"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <Spinner
-            android:id="@+id/spinnerBook"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:layout_marginEnd="4dp"/>
+            <!-- HERO SECTION -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="24dp">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/pure_white">
+                    
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/divine_gold"/>
+                        
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📖 Welcome to JK Bible"
+                            android:textColor="@color/royal_blue"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+                            
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Today's Verse"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp"
+                            android:layout_marginTop="8dp"/>
 
-        <Spinner
-            android:id="@+id/spinnerChapter"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8"/>
-    </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvDailyVerse"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="&quot;For God so loved the world...&quot;"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="italic"
+                            android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-    <!-- ========== VERSE LIST ========== -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvVerses"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"
-        android:clipToPadding="false"/>
+            <!-- QUICK ACCESS GRID (2x2) -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false"
+                android:layout_marginBottom="24dp">
+
+                <!-- Read Bible -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardRead"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📖" android:textSize="24sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Read Bible" android:textColor="@color/royal_blue" android:textStyle="bold" android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Search -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔎" android:textSize="24sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Search" android:textColor="@color/royal_blue" android:textStyle="bold" android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Hymns -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardHymns"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎵" android:textSize="24sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hymns" android:textColor="@color/royal_blue" android:textStyle="bold" android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Favorites -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardFavorites"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⭐" android:textSize="24sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Favorites" android:textColor="@color/royal_blue" android:textStyle="bold" android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </GridLayout>
+
+            <!-- BIBLE READING SECTION (VISIBLE WHEN READING) -->
+            <LinearLayout
+                android:id="@+id/layoutReader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- SELECTOR ROW -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/selector_bg">
+
+                    <Spinner
+                        android:id="@+id/spinnerVersion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/spinnerBook"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2" />
+
+                    <Spinner
+                        android:id="@+id/spinnerChapter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvVerses"
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

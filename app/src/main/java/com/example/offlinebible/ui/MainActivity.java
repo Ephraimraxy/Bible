@@ -39,8 +39,10 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
     private boolean isSpeaking = false;
 
     private Spinner spinnerVersion, spinnerBook, spinnerChapter;
-    private ImageButton btnNightMode, btnSearch, btnBookmarks;
-    private TextView tvHeader;
+    private ImageButton btnNightMode, btnSearch, btnMenu;
+    private View layoutReader;
+    private androidx.cardview.widget.CardView cardRead, cardSearch, cardHymns, cardFavorites;
+    private TextView tvDailyVerse;
 
     private List<String> versionList = new ArrayList<>();
     private List<String> bookList = new ArrayList<>();
@@ -78,8 +80,21 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
         spinnerChapter = findViewById(R.id.spinnerChapter);
 
         btnNightMode = findViewById(R.id.btnNightMode);
-        btnSearch = findViewById(R.id.btnSearch);
-        tvHeader = findViewById(R.id.tvHeader);
+        btnSearch = findViewById(R.id.btnSearchTop);
+        btnMenu = findViewById(R.id.btnMenu);
+
+        layoutReader = findViewById(R.id.layoutReader);
+        cardRead = findViewById(R.id.cardRead);
+        cardSearch = findViewById(R.id.cardSearch);
+        cardHymns = findViewById(R.id.cardHymns);
+        cardFavorites = findViewById(R.id.cardFavorites);
+        tvDailyVerse = findViewById(R.id.tvDailyVerse);
+
+        // Populate a random daily verse
+        tvDailyVerse.setText("\"For I know the plans I have for you,\" declares the Lord, \"plans to prosper you and not to harm you...\"");
+
+        // Hide reader by default
+        layoutReader.setVisibility(View.GONE);
 
         // 4. Initialise spinners from database
         initVersionSpinner();
@@ -87,11 +102,21 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
         // 5. TTS
         initTTS();
 
-        // 6. Night mode toggle
-        btnNightMode.setOnClickListener(v -> toggleNightMode());
+        // 6. Navigation / Home Actions
+        cardRead.setOnClickListener(v -> {
+            layoutReader.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Opening Bible Reader...", Toast.LENGTH_SHORT).show();
+            rvVerses.requestFocus();
+        });
 
-        // 7. Search button
+        cardSearch.setOnClickListener(v -> showSearchDialog());
         btnSearch.setOnClickListener(v -> showSearchDialog());
+
+        cardHymns.setOnClickListener(v -> Toast.makeText(this, "Hymns feature coming soon!", Toast.LENGTH_SHORT).show());
+        cardFavorites.setOnClickListener(v -> Toast.makeText(this, "Favorites feature coming soon!", Toast.LENGTH_SHORT).show());
+
+        btnNightMode.setOnClickListener(v -> toggleNightMode());
+        btnMenu.setOnClickListener(v -> Toast.makeText(this, "Menu coming soon!", Toast.LENGTH_SHORT).show());
     }
 
     // ===================== VERSION SPINNER =====================
@@ -181,10 +206,7 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
 
         List<BibleVerse> verses = dbHelper.getChapter(currentVersion, currentBook, currentChapter);
 
-        // Update header
-        if (tvHeader != null) {
-            tvHeader.setText(currentBook + " " + currentChapter + " (" + currentVersion + ")");
-        }
+        // Header is now fixed "JK Bible", no dynamic update needed here for now
 
         if (adapter == null) {
             adapter = new VerseAdapter(this, verses, currentVersionIsEnglish, this);
@@ -288,9 +310,7 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
 
         Toast.makeText(this, results.size() + " results found", Toast.LENGTH_SHORT).show();
 
-        if (tvHeader != null) {
-            tvHeader.setText("Search: \"" + query + "\" (" + results.size() + " results)");
-        }
+        layoutReader.setVisibility(View.VISIBLE);
 
         if (adapter == null) {
             adapter = new VerseAdapter(this, results, currentVersionIsEnglish, this);

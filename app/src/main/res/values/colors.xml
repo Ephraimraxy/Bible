@@ -1,5 +1,20 @@
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <!-- JK Bible Brand Palette -->
+    <color name="royal_blue">#1E3A8A</color>
+    <color name="divine_gold">#FBBF24</color>
+    <color name="reading_bg">#F9FAFB</color>
+    <color name="reading_bg_dark">#0F172A</color>
+    <color name="pure_white">#FFFFFF</color>
+    <color name="verse_highlight">#FEF3C7</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_muted">#9CA3AF</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- Legacy / Theme Defaults -->
+    <color name="colorPrimary">@color/royal_blue</color>
+    <color name="colorPrimaryDark">#162C6B</color>
+    <color name="colorAccent">@color/divine_gold</color>
 </resources>
