@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
     private boolean isSpeaking = false;
 
     private Spinner spinnerVersion, spinnerBook, spinnerChapter;
-    private ImageButton btnNightMode, btnSearch, btnMenu;
-    private View layoutReader;
+    private ImageButton btnSearch, btnMenu;
+    private View layoutReader, layoutHome;
     private androidx.cardview.widget.CardView cardRead, cardSearch, cardHymns, cardFavorites;
     private TextView tvDailyVerse;
 
@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
     private String currentVersion = "KJV";
     private String currentBook = "Genesis";
     private int currentChapter = 1;
-    private boolean isNightMode = false;
     private boolean currentVersionIsEnglish = true;
 
     // Flags to prevent spinner callbacks during programmatic updates
@@ -79,10 +78,10 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
         spinnerBook = findViewById(R.id.spinnerBook);
         spinnerChapter = findViewById(R.id.spinnerChapter);
 
-        btnNightMode = findViewById(R.id.btnNightMode);
         btnSearch = findViewById(R.id.btnSearchTop);
         btnMenu = findViewById(R.id.btnMenu);
 
+        layoutHome = findViewById(R.id.layoutHome);
         layoutReader = findViewById(R.id.layoutReader);
         cardRead = findViewById(R.id.cardRead);
         cardSearch = findViewById(R.id.cardSearch);
@@ -91,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
         tvDailyVerse = findViewById(R.id.tvDailyVerse);
 
         // Populate a random daily verse
-        tvDailyVerse.setText("\"For I know the plans I have for you,\" declares the Lord, \"plans to prosper you and not to harm you...\"");
+        tvDailyVerse.setText(
+                "\"For I know the plans I have for you,\" declares the Lord, \"plans to prosper you and not to harm you...\"");
 
         // Hide reader by default
         layoutReader.setVisibility(View.GONE);
@@ -104,19 +104,29 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
 
         // 6. Navigation / Home Actions
         cardRead.setOnClickListener(v -> {
-            layoutReader.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "Opening Bible Reader...", Toast.LENGTH_SHORT).show();
-            rvVerses.requestFocus();
+            showReader();
         });
 
         cardSearch.setOnClickListener(v -> showSearchDialog());
         btnSearch.setOnClickListener(v -> showSearchDialog());
 
-        cardHymns.setOnClickListener(v -> Toast.makeText(this, "Hymns feature coming soon!", Toast.LENGTH_SHORT).show());
-        cardFavorites.setOnClickListener(v -> Toast.makeText(this, "Favorites feature coming soon!", Toast.LENGTH_SHORT).show());
+        cardHymns
+                .setOnClickListener(v -> Toast.makeText(this, "Hymns feature coming soon!", Toast.LENGTH_SHORT).show());
+        cardFavorites.setOnClickListener(
+                v -> Toast.makeText(this, "Favorites feature coming soon!", Toast.LENGTH_SHORT).show());
 
-        btnNightMode.setOnClickListener(v -> toggleNightMode());
-        btnMenu.setOnClickListener(v -> Toast.makeText(this, "Menu coming soon!", Toast.LENGTH_SHORT).show());
+        btnMenu.setOnClickListener(v -> showHome());
+    }
+
+    private void showReader() {
+        layoutHome.setVisibility(View.GONE);
+        layoutReader.setVisibility(View.VISIBLE);
+        rvVerses.requestFocus();
+    }
+
+    private void showHome() {
+        layoutReader.setVisibility(View.GONE);
+        layoutHome.setVisibility(View.VISIBLE);
     }
 
     // ===================== VERSION SPINNER =====================
@@ -130,12 +140,18 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
         spinnerVersion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                if (suppressVersionCallback) { suppressVersionCallback = false; return; }
+                if (suppressVersionCallback) {
+                    suppressVersionCallback = false;
+                    return;
+                }
                 currentVersion = versionList.get(pos);
                 currentVersionIsEnglish = dbHelper.isEnglishVersion(currentVersion);
                 initBookSpinner();
             }
-            @Override public void onNothingSelected(AdapterView<?> parent) {}
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         // Trigger initial book population
@@ -158,12 +174,18 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
         spinnerBook.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                if (suppressBookCallback) { suppressBookCallback = false; return; }
+                if (suppressBookCallback) {
+                    suppressBookCallback = false;
+                    return;
+                }
                 currentBook = bookList.get(pos);
                 currentChapter = 1;
                 initChapterSpinner();
             }
-            @Override public void onNothingSelected(AdapterView<?> parent) {}
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         if (!bookList.isEmpty()) {
@@ -178,7 +200,8 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
     private void initChapterSpinner() {
         int count = dbHelper.getChapterCount(currentVersion, currentBook);
         chapterList = new ArrayList<>();
-        for (int i = 1; i <= count; i++) chapterList.add(i);
+        for (int i = 1; i <= count; i++)
+            chapterList.add(i);
 
         ArrayAdapter<Integer> cAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, chapterList);
@@ -188,11 +211,17 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
         spinnerChapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                if (suppressChapterCallback) { suppressChapterCallback = false; return; }
+                if (suppressChapterCallback) {
+                    suppressChapterCallback = false;
+                    return;
+                }
                 currentChapter = chapterList.get(pos);
                 loadChapter();
             }
-            @Override public void onNothingSelected(AdapterView<?> parent) {}
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         loadChapter();
@@ -310,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
 
         Toast.makeText(this, results.size() + " results found", Toast.LENGTH_SHORT).show();
 
-        layoutReader.setVisibility(View.VISIBLE);
+        showReader();
 
         if (adapter == null) {
             adapter = new VerseAdapter(this, results, currentVersionIsEnglish, this);
@@ -319,15 +348,6 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
             adapter.updateVerses(results, currentVersionIsEnglish);
         }
         rvVerses.scrollToPosition(0);
-    }
-
-    // ===================== NIGHT MODE =====================
-
-    private void toggleNightMode() {
-        isNightMode = !isNightMode;
-        AppCompatDelegate.setDefaultNightMode(
-                isNightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
-        );
     }
 
     // ===================== LIFECYCLE =====================
