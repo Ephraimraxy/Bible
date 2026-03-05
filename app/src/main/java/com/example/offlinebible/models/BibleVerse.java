@@ -10,9 +10,11 @@ public class BibleVerse {
     private String text;
     private boolean isBookmarked;
     private boolean isHighlighted;
+    private String highlightColor; // Persistent color (Hex or null)
 
-    public BibleVerse(int id, String versionId, int bookNumber, String bookName, 
-                      int chapter, int verse, String text, boolean isBookmarked, boolean isHighlighted) {
+    public BibleVerse(int id, String versionId, int bookNumber, String bookName,
+            int chapter, int verse, String text, boolean isBookmarked,
+            boolean isHighlighted, String highlightColor) {
         this.id = id;
         this.versionId = versionId;
         this.bookNumber = bookNumber;
@@ -22,17 +24,55 @@ public class BibleVerse {
         this.text = text;
         this.isBookmarked = isBookmarked;
         this.isHighlighted = isHighlighted;
+        this.highlightColor = highlightColor;
     }
 
     // Getters and Setters
-    public int getId() { return id; }
-    public String getVersionId() { return versionId; }
-    public String getBookName() { return bookName; }
-    public int getChapter() { return chapter; }
-    public int getVerse() { return verse; }
-    public String getText() { return text; }
-    public boolean isBookmarked() { return isBookmarked; }
-    public void setBookmarked(boolean bookmarked) { isBookmarked = bookmarked; }
-    public boolean isHighlighted() { return isHighlighted; }
-    public void setHighlighted(boolean highlighted) { isHighlighted = highlighted; }
+    public int getId() {
+        return id;
+    }
+
+    public String getVersionId() {
+        return versionId;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public int getChapter() {
+        return chapter;
+    }
+
+    public int getVerse() {
+        return verse;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        isBookmarked = bookmarked;
+    }
+
+    public boolean isHighlighted() {
+        return isHighlighted;
+    }
+
+    public void setHighlighted(boolean highlighted) {
+        isHighlighted = highlighted;
+    }
+
+    public String getHighlightColor() {
+        return highlightColor;
+    }
+
+    public void setHighlightColor(String highlightColor) {
+        this.highlightColor = highlightColor;
+    }
 }

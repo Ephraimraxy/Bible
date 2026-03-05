@@ -63,15 +63,6 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <ImageButton
-                android:id="@+id/btnPlayVoice"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_media_play"
-                android:tint="@color/royal_blue"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitCenter"
-                android:contentDescription="Play verse"/>
 
             <ImageButton
                 android:id="@+id/btnBookmark"

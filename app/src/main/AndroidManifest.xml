@@ -4,9 +4,11 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/Theme.OfflineBible">
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true">
@@ -19,6 +21,14 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true" />
+        
+        <activity
+            android:name=".ui.HymnListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".ui.HymnDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

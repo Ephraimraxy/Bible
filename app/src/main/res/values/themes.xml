@@ -1,6 +1,6 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="Theme.OfflineBible" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <!-- Base application theme. STRICTLY LIGHT MODE -->
+    <style name="Theme.OfflineBible" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Brand Colors -->
         <item name="colorPrimary">@color/royal_blue</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

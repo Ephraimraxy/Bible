@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/royal_blue"
@@ -11,12 +12,21 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <ImageView
-            android:id="@+id/imgSplashLogo"
+        <androidx.cardview.widget.CardView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/jk_bible_logo_transparent"
-            android:contentDescription="Splash Logo" />
+            app:cardCornerRadius="75dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/royal_blue">
+
+            <ImageView
+                android:id="@+id/imgSplashLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/jk_bible_logo_transparent"
+                android:contentDescription="Splash Logo"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="wrap_content"

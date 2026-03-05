@@ -3,8 +3,11 @@ package com.example.offlinebible.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.graphics.Outline;
+import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,16 +20,20 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        ImageView logo = findViewById(R.id.imgSplashLogo);
+        ImageView imgLogo = findViewById(R.id.imgSplashLogo);
 
         // Create a spinning animation
-        RotateAnimation rotate = new RotateAnimation(
-                0, 360,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f);
-        rotate.setDuration(2000); // 2 seconds
-        rotate.setRepeatCount(Animation.INFINITE);
-        logo.startAnimation(rotate);
+        Animation rotate = AnimationUtils.loadAnimation(this, R.anim.rotate_infinite);
+        imgLogo.startAnimation(rotate);
+
+        // Force circular clipping to remove any background edges from the image
+        imgLogo.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setOval(0, 0, view.getWidth(), view.getHeight());
+            }
+        });
+        imgLogo.setClipToOutline(true);
 
         // Delay for 3 seconds and then launch MainActivity
         new Handler().postDelayed(() -> {
