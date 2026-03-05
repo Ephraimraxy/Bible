@@ -644,7 +644,7 @@ public class MainActivity extends AppCompatActivity implements VerseAdapter.OnVe
 
         bio.append("🎖 NATIONAL HONOR & SERVICE\n");
         bio.append(
-                "Professor John KennedyOpara is an Officer of the Order of the Federal Republic (OFR), a prestigious national honor awarded for his patriotic and distinguished service to Nigeria. He served with distinction as the Pioneer Executive Secretary of the Nigerian Christian Pilgrim Commission (NCPC) from 2008 to 2016, where he revolutionized the spiritual administrative framework for pilgrims nationwide.\n\n");
+                "Professor John Kennedy Opara is an Officer of the Order of the Federal Republic (OFR), a prestigious national honor awarded for his patriotic and distinguished service to Nigeria. He served with distinction as the Pioneer Executive Secretary of the Nigerian Christian Pilgrim Commission (NCPC) from 2008 to 2016, where he revolutionized the spiritual administrative framework for pilgrims nationwide.\n\n");
 
         bio.append("🎓 ACADEMIC EXCELLENCE\n");
         bio.append(
